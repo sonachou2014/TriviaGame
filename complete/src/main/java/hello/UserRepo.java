@@ -32,4 +32,19 @@ public class UserRepo {
 
     }
 
+    public User getUser(String userId){
+        for (User user : users) {
+            if (user.getUserId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public List<User> getUsers(int page, int pageSize) {
+        int from = Math.max(0,page*pageSize);
+        int to = Math.min(users.size(),(page+1)*pageSize);
+
+        return users.subList(from, to);
+    }
 }
