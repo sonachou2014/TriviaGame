@@ -1,0 +1,23 @@
+body, html {
+    height: 100%;
+    width: 100%;
+}
+
+#chatbox-container {
+    position: relative;
+    height: 100%;
+}
+
+#timer-container {
+    margin-bottom: 50%;
+}
+
+#user-input {
+    width: 100%;
+}
+ 
+div#lower-container {
+    position: fixed;
+    bottom: 0%;
+}
+
