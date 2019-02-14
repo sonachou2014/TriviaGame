@@ -29,8 +29,6 @@ public class LoginController {
             model.addAttribute("message","Invalid user Id or password");
             return "login";
         }
-
-
     }
 
     @GetMapping("/chat")
