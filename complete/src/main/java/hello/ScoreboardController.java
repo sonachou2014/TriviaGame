@@ -11,18 +11,18 @@ import java.util.List;
 @RestController
 public class ScoreboardController {
 
-    @Autowired
-    private BookRepository repository;
-
-    @GetMapping("/scoreboard")
-    public List scoreboard() {
-        List list = repository.getUsers();
-        return list;
-    }
-
-    @GetMapping("/changeScore")
-    public void changeScore(@RequestParam int userId) {
-        User user = repository.getUser(id);
-        user.setScore(user.getScore() + 1);
-    }
+//    @Autowired
+//    private BookRepository repository;
+//
+//    @GetMapping("/scoreboard")
+//    public List scoreboard() {
+//        List list = repository.getUsers();
+//        return list;
+//    }
+//
+//    @GetMapping("/changeScore")
+//    public void changeScore(@RequestParam int userId) {
+//        User user = repository.getUser(id);
+//        user.setScore(user.getScore() + 1);
+//    }
 }
