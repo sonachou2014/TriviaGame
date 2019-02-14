@@ -37,4 +37,26 @@ public class LoginController {
     public String chat() {
         return "chat";
     }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @PostMapping("/signup")
+    public String userSignUp(Model model, HttpSession session,@RequestParam String Firstname,@RequestParam String Email, @RequestParam String Password,@RequestParam String password_confirmation){
+        if (!Password.equals(password_confirmation)){
+            session.setAttribute("message","Password do not match");
+            return "register";
+        }
+
+        else if (Email!=null && Password!=null){
+            userRepo.addUser(Email,Password);
+            model.addAttribute("name","Thank you for creating the account "+Firstname+"!!!!Login to start you Trivia Game");
+            return "login";
+        } else
+
+        return "register";
+    }
+
 }

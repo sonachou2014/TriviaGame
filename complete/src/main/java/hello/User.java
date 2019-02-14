@@ -6,9 +6,10 @@ public class User {
     private String password;
     private int score;
 
-    public User(String userId, String password) {
+    public User(String userId, String password, int score) {
         this.userId = userId;
         this.password = password;
+        this.score = score;
     }
 
     public String getUserId() {

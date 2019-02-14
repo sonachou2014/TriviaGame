@@ -14,7 +14,7 @@ public class UserRepo {
         users = new ArrayList<>();
 
         for (int i = 1; i <= 10; i++) {
-            users.add(new User("user"+i+"@gmail.com","passw"+i));
+            users.add(new User("user"+i+"@gmail.com","passw"+i,1000+i));
         }
 
     }
@@ -30,6 +30,20 @@ public class UserRepo {
         }
        return isUserValid;
 
+    }
+
+    public int getScore(String userName){
+        int score = 0;
+        for (User user : users) {
+            if ((user.getUserId()).equals(userName)) {
+                score = user.getScore();
+            }
+        }
+        return score;
+    }
+
+    public void addUser(String userName, String password) {
+        users.add(new User(userName,password,1000));
     }
 
     public User getUser(String userId){
