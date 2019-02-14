@@ -6,13 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Chatbox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../static/main.js"></script>
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
         integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" th:href="/style.css" href="../static/style.css">
-    <script src="main.js"></script>
 </head>
 
 <body>
+
+    <button id="apibtn">GET API</button>
 
 
     <div id="upper-container" class="container">
@@ -24,26 +31,8 @@
                             <th scope="col">Chatbox</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Trivia Master: What is the capital of Sweden?
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Player 1: Malmo</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2: Göteborg</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3: Stockholm</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Trivia Master: Player 3 is correct!
-                            </td>
-                        </tr>
+                    <tbody id="tbody">
+                        
                     </tbody>
                 </table>
             </div>
