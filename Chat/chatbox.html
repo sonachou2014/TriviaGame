@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chatbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
+        integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="/style.css" href="../static/style.css">
+    <script src="main.js"></script>
+</head>
+
+<body>
+
+
+    <div id="upper-container" class="container">
+        <div class="row">
+            <div id="chatbox-container" class="col-md-8  col-10">
+                <table id="chatbox" class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Chatbox</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Trivia Master: What is the capital of Sweden?
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Player 1: Malmo</td>
+                        </tr>
+                        <tr>
+                            <td>Player 2: Göteborg</td>
+                        </tr>
+                        <tr>
+                            <td>Player 3: Stockholm</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Trivia Master: Player 3 is correct!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="timer-container" class="col-md-4 col-2">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Time:</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>53s</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="middle-container" class="container d-none d-sm-block">
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div id="players-container" class="col-md-4">
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Scoreboard</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body">
+                        <tr>
+                            <td>Player 1</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+
+                            <td>Player 2</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+
+                            <td>Player 3</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="lower-container" class="container">
+        <div class="row">
+            <div id="user-input" class="input-group mb-3 col-md-8 col-sm-12">
+                <input type="text" class="form-control" placeholder="Enter your message"
+                    aria-label="Enter your message:" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
