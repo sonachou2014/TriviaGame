@@ -19,15 +19,8 @@ public class MessageController {
 
     @MessageMapping("/msg")
     @SendTo("/topic/main")
-//    public Message message(Message message) throws Exception {
-//        Thread.sleep(1000);
-//        if (message.getText().equals(correctAnswer)){
-//            this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"correct!\"}");
-//        }
-//        return new Message(HtmlUtils.htmlEscape(message.getName()), HtmlUtils.htmlEscape(message.getText()));
-//    }
     public void message(Message message) throws Exception {
-        Thread.sleep(1000);
+        Thread.sleep(100);
         this.template.convertAndSend("/topic/main", "{\"name\":\"" +message.getName() + "\",\"text\":\"" + message.getText() + "\"}");
         if (message.getText().equals(correctAnswer)){
             this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"correct!\"}");
@@ -39,7 +32,7 @@ public class MessageController {
 
     @Scheduled(fixedRate = 10000)
     public void greeting() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(100);
 
         final String uri = "https://opentdb.com/api.php?amount=1";
 
