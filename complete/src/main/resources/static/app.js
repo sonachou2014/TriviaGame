@@ -19,10 +19,10 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/main', function (greeting) {
-        console.log(greeting);
             showMessage(JSON.parse(greeting.body).name, JSON.parse(greeting.body).text);
         });
     });
+    loadScoreBoard();
 }
 
 function disconnect() {
@@ -53,3 +53,24 @@ $(function () {
     $( "#send" ).click(function() { sendMsg(); });
 });
 
+function loadScoreBoard() {
+	$.ajax({
+    url: 'http://localhost:8080/scoreboard',
+    dataType: 'json',
+    success: function(data) {
+      for (let i = 0; i < data.length; i++) {
+      	addRow(data[i].userId, data[i].score)
+      }
+    }
+  });
+}
+
+function addRow(userId, score) {
+    let row = $("<tr></tr>");
+    let userIdCell = $("<td></td>").text(userId);
+    let scoreCell = $("<td></td>").text(score);
+
+    $(row).append(userIdCell);
+    $(row).append(scoreCell);
+    $("#tbody").append(row);
+}
