@@ -21,6 +21,7 @@ public class ScoreboardController {
 
     @GetMapping("/changeScore")
     public void changeScore(@RequestParam String userId) {
+        System.out.println(userId);
         User user = repository.getUser(userId);
         user.setScore(user.getScore() + 1);
     }

@@ -34,7 +34,7 @@ public class UserRepo {
 
     public User getUser(String userId){
         for (User user : users) {
-            if (user.getUserId() == userId) {
+            if (user.getUserId().equals(userId)) {
                 return user;
             }
         }

@@ -42,6 +42,7 @@ function showGreeting(message) {
 }
 function showMessage(name, text) {
     $("#greetings").append("<tr><td>" + name + ": " + text + "</td></tr>");
+    if (text == "abc") changeScore(name);
 }
 
 $(function () {
@@ -54,15 +55,15 @@ $(function () {
 });
 
 function loadScoreBoard() {
-	$.ajax({
-    url: 'http://localhost:8080/scoreboard',
-    dataType: 'json',
-    success: function(data) {
-      for (let i = 0; i < data.length; i++) {
-      	addRow(data[i].userId, data[i].score)
-      }
-    }
-  });
+    $.ajax({
+        url: 'http://localhost:8080/scoreboard',
+        dataType: 'json',
+        success: function(data) {
+          for (let i = 0; i < data.length; i++) {
+            addRow(data[i].userId, data[i].score)
+          }
+        }
+    });
 }
 
 function addRow(userId, score) {
@@ -73,4 +74,12 @@ function addRow(userId, score) {
     $(row).append(userIdCell);
     $(row).append(scoreCell);
     $("#tbody").append(row);
+}
+
+function changeScore(userId) {
+    $.ajax({
+        url: 'http://localhost:8080/changeScore?userId=' + userId
+    });
+    $("#tbody").html("");
+    loadScoreBoard();
 }
