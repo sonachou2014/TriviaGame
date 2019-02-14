@@ -11,6 +11,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
+<<<<<<< HEAD
 <body class="text-center">
 
     <form class="form-signin" action="/task2" method="POST">
@@ -29,6 +30,19 @@
         </div>
         <div th:text="${message}"></div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+=======
+<body>
+    <div>
+        <a href="/">Login</a>
+        <a href="/chat">chat</a>
+    </div>
+    <form action="/login" method="post">
+        username
+        <input type="text" name="username">
+        password
+        <input type="text" name="password">
+        <input type="submit">
+>>>>>>> 62e200410ec400e6fdb48107646377642879f8e5
     </form>
 </body>
 </html>
