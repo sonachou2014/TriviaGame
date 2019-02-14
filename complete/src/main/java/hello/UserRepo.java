@@ -19,7 +19,7 @@ public class UserRepo {
 
     }
 
-    public String getUser(String userName, String password) {
+    public String validateUser(String userName, String password) {
         String isUserValid = "userNotValid";
         for (User user : users) {
             if ((user.getUserId()).equals(userName) && (user.getPassword()).equals(password)) {

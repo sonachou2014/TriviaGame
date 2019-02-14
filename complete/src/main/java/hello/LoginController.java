@@ -21,7 +21,7 @@ public class LoginController {
 
     @PostMapping("/task2")
     public String user(Model model, HttpSession session, @RequestParam String inputEmail, @RequestParam String inputPassword){
-        if (userRepo.getUser(inputEmail,inputPassword).equals("userValid")){
+        if (userRepo.validateUser(inputEmail,inputPassword).equals("userValid")){
             session.setAttribute("username",inputEmail);
             return "afterLogin";
         }
