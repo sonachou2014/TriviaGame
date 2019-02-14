@@ -8,98 +8,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../static/main.js"></script>
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
-        integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" th:href="/style.css" href="../static/style.css">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
 </head>
 
 <body>
+<div>
+    Logged in as <span id="username"th:text="${session.username}"></span>
+</div>
 
-    <button id="apibtn">GET API</button>
+<form class="form-inline">
+    <div class="form-group">
+        <label for="connect">WebSocket connection:</label>
+        <button id="connect" class="btn btn-default" type="submit">Connect</button>
+        <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
+    </div>
+</form>
+
+<button id="apibtn">GET API</button>
 
 
-    <div id="upper-container" class="container">
-        <div class="row">
-            <div id="chatbox-container" class="col-md-8  col-10">
-                <table id="chatbox" class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Chatbox</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody">
-                        
-                    </tbody>
-                </table>
-            </div>
+<div id="upper-container" class="container">
+    <div class="row">
+        <div id="chatbox-container" class="col-md-8  col-10">
+            <table id="conversation" class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Chatbox</th>
+                </tr>
+                </thead>
+                <tbody id="greetings">
 
-            <div id="timer-container" class="col-md-4 col-2">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Time:</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td>53s</td>
-                    </tr>
-                </table>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="timer-container" class="col-md-4 col-2">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Time:</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>53s</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div id="middle-container" class="container d-none d-sm-block">
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div id="players-container" class="col-md-4">
+
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Scoreboard</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<div id="lower-container" class="container">
+    <div class="row">
+        <div id="user-input" class="input-group mb-3 col-md-8 col-sm-12">
+            <input type="text" id="text" class="form-control" placeholder="Enter your message"
+                   aria-label="Enter your message:" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button id="send" class="btn btn-outline-secondary" type="button">Send</button>
             </div>
         </div>
     </div>
-
-
-
-    <div id="middle-container" class="container d-none d-sm-block">
-        <div class="row">
-            <div class="col-md-8"></div>
-            <div id="players-container" class="col-md-4">
-
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Scoreboard</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody id="body">
-                        <tr>
-                            <td>Player 1</td>
-                            <td>15</td>
-                        </tr>
-                        <tr>
-
-                            <td>Player 2</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-
-                            <td>Player 3</td>
-                            <td>1</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
-
-    <div id="lower-container" class="container">
-        <div class="row">
-            <div id="user-input" class="input-group mb-3 col-md-8 col-sm-12">
-                <input type="text" class="form-control" placeholder="Enter your message"
-                    aria-label="Enter your message:" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Send</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+</div>
 
 
 </body>

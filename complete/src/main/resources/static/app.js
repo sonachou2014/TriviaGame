@@ -83,3 +83,19 @@ function changeScore(userId) {
     $("#tbody").html("");
     loadScoreBoard();
 }
+
+$('document').ready(function(){
+
+    $("#apibtn").click(function () {
+        $.ajax({
+            url: 'http://jservice.io/api/random',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    });
+})
+
+
+
