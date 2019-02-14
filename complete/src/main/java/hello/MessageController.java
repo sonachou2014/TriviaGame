@@ -16,6 +16,12 @@ import org.springframework.web.util.HtmlUtils;
 @EnableScheduling
 public class MessageController {
     private String correctAnswer = null;
+    Boolean isAnswered = true;
+    int counter = 0;
+    @Autowired
+    private SimpMessagingTemplate template;
+    @Autowired
+    private UserRepo repository;
 
     @MessageMapping("/msg")
     @SendTo("/topic/main")
@@ -23,27 +29,32 @@ public class MessageController {
         Thread.sleep(100);
         this.template.convertAndSend("/topic/main", "{\"name\":\"" +message.getName() + "\",\"text\":\"" + message.getText() + "\"}");
         if (message.getText().equals(correctAnswer)){
+            User user = repository.getUser(message.getName());
+            user.setScore(user.getScore() + 1);
+            System.out.println(user.getScore());
+            isAnswered = true;
             this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"correct!\"}");
         }
     }
 
-    @Autowired
-    private SimpMessagingTemplate template;
-
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 1000)
     public void greeting() throws InterruptedException {
-        Thread.sleep(100);
+//        Thread.sleep(100);
+        if(isAnswered || counter == 20) {
+            final String uri = "https://opentdb.com/api.php?amount=1";
 
-        final String uri = "https://opentdb.com/api.php?amount=1";
+            RestTemplate restTemplate = new RestTemplate();
+            String result = restTemplate.getForObject(uri, String.class);
+            JSONObject obj = new JSONObject(result);
+            String question = obj.getJSONArray("results").getJSONObject(0).getString("question");
+            String answer = obj.getJSONArray("results").getJSONObject(0).getString("correct_answer");
 
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
-        JSONObject obj = new JSONObject(result);
-        String question = obj.getJSONArray("results").getJSONObject(0).getString("question");
-        String answer = obj.getJSONArray("results").getJSONObject(0).getString("correct_answer");
-
-        correctAnswer = answer;
-
-        this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"" + question + " (" + answer + ")" + "\"}");
+            correctAnswer = answer;
+            this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"" + question + " (" + answer + ")" + "\"}");
+            isAnswered = false;
+            counter = 0;
+        } else {
+            counter++;
+        }
     }
 }

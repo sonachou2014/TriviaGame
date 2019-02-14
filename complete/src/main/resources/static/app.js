@@ -21,9 +21,12 @@ function connect() {
         stompClient.subscribe('/topic/main', function (greeting) {
             console.log(greeting);
             showMessage(JSON.parse(greeting.body).name, JSON.parse(greeting.body).text);
+            if (JSON.parse(greeting.body).name == "Trivia" && JSON.parse(greeting.body).text == "correct!") {
+                $("#tbody").html("");
+                loadScoreBoard();
+            }
         });
     });
-    loadScoreBoard();
 }
 
 function disconnect() {
@@ -43,7 +46,7 @@ function showGreeting(message) {
 }
 function showMessage(name, text) {
     $("#greetings").append("<tr><td>" + name + ": " + text + "</td></tr>");
-    if (text == "abc") changeScore(name);
+    //if (text == "abc") changeScore(name);
 }
 
 $(function () {
@@ -54,6 +57,7 @@ $(function () {
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendMsg(); });
     connect();
+    loadScoreBoard();
 });
 
 function loadScoreBoard() {
