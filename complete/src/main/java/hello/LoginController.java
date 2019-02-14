@@ -23,8 +23,7 @@ public class LoginController {
     public String user(Model model, HttpSession session, @RequestParam String inputEmail, @RequestParam String inputPassword){
         if (userRepo.validateUser(inputEmail,inputPassword).equals("userValid")){
             session.setAttribute("username",inputEmail);
-            session.setAttribute("score",userRepo.getScore(inputEmail));
-            return "afterLogin";
+            return "chatbox";
         }
         else {
             model.addAttribute("message","Invalid user Id or password");
