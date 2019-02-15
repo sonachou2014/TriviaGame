@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -52,9 +52,8 @@
                 <div class="info bob">
                     <div class="title">
                         <!--<div class="name" th:text="${session.name}"></div>-->
-                        <div class="desc">Username</div>
-                        <div class="desc">Name</div>
-                        <div class="desc">High Score</div>
+                        <div class="desc" th:text="${session.username}"/>
+                        <div class="desc" th:text="'Score: '+${session.score}"/>
                     </div>
                 </div>
             </div>
@@ -64,7 +63,9 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4">
+            <a href="/chat" style="color: #000000">
             <button class="btn btn-secondary" type="button" id="dropdownMenuButton"> Start game!</button>
+            </a>
         </div>
     </div>
 </div>
