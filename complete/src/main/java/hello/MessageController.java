@@ -28,7 +28,7 @@ public class MessageController {
     public void message(Message message) throws Exception {
         Thread.sleep(100);
         this.template.convertAndSend("/topic/main", "{\"name\":\"" +message.getName() + "\",\"text\":\"" + message.getText() + "\"}");
-        if (message.getText().equals(correctAnswer)){
+        if (message.getText().equalsIgnoreCase(correctAnswer)){
             User user = repository.getUserByName(message.getName());
             user.setScore(user.getScore() + 1);
             isAnswered = true;
@@ -38,8 +38,8 @@ public class MessageController {
 
     @Scheduled(fixedRate = 1000)
     public void greeting() throws InterruptedException {
-//        Thread.sleep(100);
-        if(isAnswered || counter == 20) {
+        int ANSWER_TIME = 20;
+        if(isAnswered || counter == ANSWER_TIME) {
             final String uri = "https://opentdb.com/api.php?amount=1";
 
             RestTemplate restTemplate = new RestTemplate();
@@ -53,6 +53,9 @@ public class MessageController {
             isAnswered = false;
             counter = 0;
         } else {
+            if (counter == ANSWER_TIME / 2) {
+                this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"" + ANSWER_TIME / 2 + " seconds left\"}");
+            }
             counter++;
         }
     }
