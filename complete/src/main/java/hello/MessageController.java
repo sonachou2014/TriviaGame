@@ -41,10 +41,12 @@ public class MessageController {
         int ANSWER_TIME = 20;
         if(isAnswered || counter == ANSWER_TIME) {
             final String uri = "https://opentdb.com/api.php?amount=1";
+//            final String uri = "http://jservice.io/api/random";
 
             RestTemplate restTemplate = new RestTemplate();
             String result = restTemplate.getForObject(uri, String.class);
             JSONObject obj = new JSONObject(result);
+            System.out.println(result);
             String question = obj.getJSONArray("results").getJSONObject(0).getString("question");
             String answer = obj.getJSONArray("results").getJSONObject(0).getString("correct_answer");
 

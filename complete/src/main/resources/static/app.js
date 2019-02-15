@@ -21,7 +21,7 @@ function connect() {
         stompClient.subscribe('/topic/main', function (msg) {
 //            console.log(msg);
             showMessage(JSON.parse(msg.body).name, JSON.parse(msg.body).text);
-            if (JSON.parse(msg.body).name == "Trivia" && JSON.parse(msg.body).text == "correct!") {
+            if (JSON.parse(msg.body).name == "Trivia") {
                 $("#tbody").html("");
                 loadScoreBoard();
             }
@@ -62,7 +62,7 @@ $(function () {
 
 function loadScoreBoard() {
     $.ajax({
-        url: 'http://localhost:8080/scoreboard',
+        url: '/scoreboard',
         dataType: 'json',
         success: function(data) {
         console.log(data);
@@ -87,7 +87,7 @@ function addRow(userId, score) {
 
 function changeScore(userId) {
     $.ajax({
-        url: 'http://localhost:8080/changeScore?userId=' + userId});
+        url: '/changeScore?userId=' + userId});
     $("#tbody").html("");
     loadScoreBoard();
 }
