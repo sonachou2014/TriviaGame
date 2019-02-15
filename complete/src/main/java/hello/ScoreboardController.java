@@ -14,7 +14,7 @@ public class ScoreboardController {
     private UserRepo repository;
 
     @GetMapping("/scoreboard")
-    public List scoreboard(@RequestParam(required=false, defaultValue="0") int page, @RequestParam(required=false, defaultValue="10") int size) {
+    public List scoreboard(@RequestParam(required=false, defaultValue="0") int page, @RequestParam(required=false, defaultValue="20") int size) {
         List list = repository.getUsers(page, size);
         return list;
     }
