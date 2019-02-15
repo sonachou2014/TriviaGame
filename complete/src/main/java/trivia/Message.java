@@ -1,4 +1,4 @@
-package hello;
+package trivia;
 
 public class Message {
 
