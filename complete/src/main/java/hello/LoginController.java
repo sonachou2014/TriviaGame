@@ -25,7 +25,6 @@ public class LoginController {
     public String user(Model model, HttpSession session, @RequestParam String inputEmail, @RequestParam String inputPassword){
         if (userRepo.validateUser(inputEmail,inputPassword).equals("userValid")){
             User user = userRepo.getUser(inputEmail);
-            System.out.println("user.getName() = " + user.getName());
             session.setAttribute("username", user.getName());
             session.setAttribute("score",user.getScore());
             return "chatbox";

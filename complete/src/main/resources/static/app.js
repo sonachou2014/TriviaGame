@@ -18,9 +18,8 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
-        //console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/main', function (msg) {
-            console.log(msg);
+//            console.log(msg);
             showMessage(JSON.parse(msg.body).name, JSON.parse(msg.body).text);
             if (JSON.parse(msg.body).name == "Trivia" && JSON.parse(msg.body).text == "correct!") {
                 $("#tbody").html("");
@@ -49,9 +48,14 @@ function showMessage(name, text) {
 
 $(function () {
     $("form").on('submit', function (e) {e.preventDefault();});
-    //$( "#connect" ).click(function() { connect(); });
+    $("#send").on('submit', function (e) {e.preventDefault();});
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendMsg();});
+    $( "#send" ).click(function() { sendMsg(); $('#text').val("");});
+    $("#text").on("keypress", function(e){
+        if(e.which == 13){
+            sendMsg(); $('#text').val("");
+        }
+    });
     connect();
     loadScoreBoard();
 });
@@ -61,6 +65,9 @@ function loadScoreBoard() {
         url: 'http://localhost:8080/scoreboard',
         dataType: 'json',
         success: function(data) {
+        console.log(data);
+        data.sort(compare);
+        console.log(data);
           for (let i = 0; i < data.length; i++) {
             addRow(data[i].name, data[i].score)
           }
@@ -88,4 +95,11 @@ function changeScore(userId) {
 function updateScroll(){
 	var chatList = document.getElementById("chatbox-container");
 	chatList.scrollTop = chatList.scrollHeight;
+}
+function compare(a,b) {
+  if (a.score > b.score)
+    return -1;
+  if (a.score < b.score)
+    return 1;
+  return 0;
 }
