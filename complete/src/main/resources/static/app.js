@@ -1,4 +1,5 @@
 var stompClient = null;
+
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
@@ -50,9 +51,7 @@ function showMessage(name, text) {
 }
 
 $(function () {
-    $("form").on('submit', function (e) {
-        e.preventDefault();
-    });
+    $("form").on('submit', function (e) {e.preventDefault();});
     //$( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendMsg(); });
@@ -84,8 +83,7 @@ function addRow(userId, score) {
 
 function changeScore(userId) {
     $.ajax({
-        url: 'http://localhost:8080/changeScore?userId=' + userId
-    });
+        url: 'http://localhost:8080/changeScore?userId=' + userId});
     $("#tbody").html("");
     loadScoreBoard();
 }

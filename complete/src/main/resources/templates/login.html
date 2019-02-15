@@ -18,14 +18,15 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Trivia Master</a>
         </div>
+
         <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
+
         </ul>
+
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li> <img style="height: 50px; width: 50px;" src="trivialogo.png" alt="trivialogo"> </li>
         </ul>
     </div>
 </nav>
@@ -37,7 +38,7 @@
 
 <div th:text="${name}"></div>
 
-<form class="form-signin" id="login" action="/task2" method="POST">
+<form class="form-signin" id="login" action="/trivia/random" method="POST">
     <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
     <label for="inputEmail" class="sr-only">Email address</label>

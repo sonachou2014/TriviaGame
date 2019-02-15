@@ -19,7 +19,7 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/task2")
+    @PostMapping("/trivia/random")
     public String user(Model model, HttpSession session, @RequestParam String inputEmail, @RequestParam String inputPassword){
         if (userRepo.validateUser(inputEmail,inputPassword).equals("userValid")){
             session.setAttribute("username",inputEmail);
@@ -33,7 +33,7 @@ public class LoginController {
 
     @GetMapping("/chat")
     public String chat() {
-        return "chat";
+        return "chatbox";
     }
 
     @GetMapping("/register")
@@ -50,7 +50,7 @@ public class LoginController {
 
         else if (Email!=null && Password!=null){
             userRepo.addUser(Email,Password);
-            model.addAttribute("name","Thank you for creating the account "+Firstname+"!!!!Login to start you Trivia Game");
+            model.addAttribute("name","Thank you for creating the account "+Firstname+"! Log in to start you Trivia Game.");
             return "login";
         } else
 
