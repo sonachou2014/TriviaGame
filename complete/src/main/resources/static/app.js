@@ -21,7 +21,7 @@ function connect() {
         stompClient.subscribe('/topic/main', function (msg) {
 //            console.log(msg);
             showMessage(JSON.parse(msg.body).name, JSON.parse(msg.body).text);
-            if (JSON.parse(msg.body).name == "Trivia" && JSON.parse(msg.body).text == "correct!") {
+            if (JSON.parse(msg.body).name == "Trivia") {
                 $("#tbody").html("");
                 loadScoreBoard();
             }

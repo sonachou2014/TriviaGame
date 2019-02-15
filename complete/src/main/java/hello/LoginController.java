@@ -36,8 +36,11 @@ public class LoginController {
     }
 
     @GetMapping("/chat")
-    public String chat() {
-        return "chatbox";
+    public String chat(HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            return "chatbox";
+        }
+        return "login";
     }
 
     @GetMapping("/register")
@@ -62,8 +65,11 @@ public class LoginController {
     }
 
     @GetMapping("/profile")
-    public String profile() {
-        return "profilepage";
+    public String profile(HttpSession session) {
+        if (session.getAttribute("username") != null) {
+            return "profilepage";
+        }
+        return "login";
     }
 
     @GetMapping("/logout")
