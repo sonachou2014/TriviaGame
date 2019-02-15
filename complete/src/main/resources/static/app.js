@@ -51,6 +51,11 @@ $(function () {
     $("#send").on('submit', function (e) {e.preventDefault();});
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendMsg(); $('#text').val("");});
+    $("#text").on("keypress", function(e){
+        if(e.which == 13){
+            sendMsg(); $('#text').val("");
+        }
+    });
     connect();
     loadScoreBoard();
 });
