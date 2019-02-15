@@ -29,9 +29,8 @@ public class MessageController {
         Thread.sleep(100);
         this.template.convertAndSend("/topic/main", "{\"name\":\"" +message.getName() + "\",\"text\":\"" + message.getText() + "\"}");
         if (message.getText().equals(correctAnswer)){
-            User user = repository.getUser(message.getName());
+            User user = repository.getUserByName(message.getName());
             user.setScore(user.getScore() + 1);
-            System.out.println(user.getScore());
             isAnswered = true;
             this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"correct!\"}");
         }

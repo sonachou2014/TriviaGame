@@ -12,3 +12,6 @@ width: -webkit-fill-available;
 #lower-container{
 margin-top: 10px;
 }
+
+#chatbox-container {
+height: 450px}

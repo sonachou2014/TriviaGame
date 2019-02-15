@@ -18,11 +18,11 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/main', function (greeting) {
-            console.log(greeting);
-            showMessage(JSON.parse(greeting.body).name, JSON.parse(greeting.body).text);
-            if (JSON.parse(greeting.body).name == "Trivia" && JSON.parse(greeting.body).text == "correct!") {
+        //console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/main', function (msg) {
+            console.log(msg);
+            showMessage(JSON.parse(msg.body).name, JSON.parse(msg.body).text);
+            if (JSON.parse(msg.body).name == "Trivia" && JSON.parse(msg.body).text == "correct!") {
                 $("#tbody").html("");
                 loadScoreBoard();
             }
@@ -42,19 +42,16 @@ function sendMsg() {
     stompClient.send("/app/msg", {}, JSON.stringify({'name': $("#username").text(), 'text': $("#text").val()}));
 }
 
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
-}
 function showMessage(name, text) {
     $("#greetings").append("<tr><td>" + name + ": " + text + "</td></tr>");
-    //if (text == "abc") changeScore(name);
+    updateScroll();
 }
 
 $(function () {
     $("form").on('submit', function (e) {e.preventDefault();});
     //$( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendMsg(); });
+    $( "#send" ).click(function() { sendMsg();});
     connect();
     loadScoreBoard();
 });
@@ -65,7 +62,7 @@ function loadScoreBoard() {
         dataType: 'json',
         success: function(data) {
           for (let i = 0; i < data.length; i++) {
-            addRow(data[i].userId, data[i].score)
+            addRow(data[i].name, data[i].score)
           }
         }
     });
@@ -88,18 +85,7 @@ function changeScore(userId) {
     loadScoreBoard();
 }
 
-$('document').ready(function(){
-
-    $("#apibtn").click(function () {
-        $.ajax({
-            url: 'http://jservice.io/api/random',
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-            }
-        })
-    });
-})
-
-
-
+function updateScroll(){
+	var chatList = document.getElementById("chatbox-container");
+	chatList.scrollTop = chatList.scrollHeight;
+}

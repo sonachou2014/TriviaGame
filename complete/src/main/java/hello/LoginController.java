@@ -22,7 +22,9 @@ public class LoginController {
     @PostMapping("/trivia/random")
     public String user(Model model, HttpSession session, @RequestParam String inputEmail, @RequestParam String inputPassword){
         if (userRepo.validateUser(inputEmail,inputPassword).equals("userValid")){
-            session.setAttribute("username",inputEmail);
+            User user = userRepo.getUser(inputEmail);
+            System.out.println("user.getName() = " + user.getName());
+            session.setAttribute("username", user.getName());
             return "chatbox";
         }
         else {
@@ -49,7 +51,7 @@ public class LoginController {
         }
 
         else if (Email!=null && Password!=null){
-            userRepo.addUser(Email,Password);
+            userRepo.addUser(Email,Password, Firstname);
             model.addAttribute("name","Thank you for creating the account "+Firstname+"! Log in to start you Trivia Game.");
             return "login";
         } else

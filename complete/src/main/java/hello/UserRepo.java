@@ -13,9 +13,13 @@ public class UserRepo {
     public UserRepo() {
         users = new ArrayList<>();
 
-        for (int i = 1; i <= 10; i++) {
-            users.add(new User("user"+i+"@gmail.com","passw"+i,1000+i));
-        }
+//        for (int i = 1; i <= 10; i++) {
+//            users.add(new User("user"+i+"@gmail.com","passw"+i,1000+i));
+//        }
+        users.add(new User("anatoli@gmail.com", "anatoli", 1, "Anatoli"));
+        users.add(new User("linus@gmail.com", "linus", 2, "Linus"));
+        users.add(new User("luc@gmail.com", "luc", 3, "Luc"));
+        users.add(new User("sonam@gmail.com", "sonam", 4, "Sonam"));
 
     }
 
@@ -42,13 +46,22 @@ public class UserRepo {
         return score;
     }
 
-    public void addUser(String userName, String password) {
-        users.add(new User(userName,password,1000));
+    public void addUser(String userName, String password, String name) {
+        users.add(new User(userName,password,0, name));
     }
 
     public User getUser(String userId){
         for (User user : users) {
             if (user.getUserId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByName(String name){
+        for (User user : users) {
+            if (user.getName().equals(name)) {
                 return user;
             }
         }
