@@ -57,4 +57,9 @@ public class LoginController {
         return "register";
     }
 
+    @GetMapping("/profile")
+    public String profile() {
+        return "profilepage";
+    }
+
 }
