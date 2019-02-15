@@ -34,7 +34,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-            <li> <img style="height: 50px; width: 50px;" src="trivialogo.png" alt="trivialogo"> </li>
+            <li><img style="height: 50px; width: 50px;" src="trivialogo.png" alt="trivialogo"></li>
         </ul>
     </div>
 </nav>
@@ -72,13 +72,21 @@
 
 <div id="lower-container" class="container">
     <div class="row">
-        <div class="col-md-7 col-sm-10">
-            <input type="text" id="text" class="form-control" placeholder="Enter your message"
-                   aria-label="Enter your message:" aria-describedby="basic-addon2">
-        </div>
+        <div class="col-md-8 col-sm-10">
+            <form action="" method="POST">
 
-        <div class="col-md-1 col-sm-12">
-            <button id="send" class="btn btn-outline-secondary" type="button">Send</button>
+
+                <div class="input-group mb-3">
+                    <input type="text" id="text" class="form-control" placeholder="Enter your message"
+                           aria-label="Enter your message:" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button id="send" class="btn btn-outline-secondary" type="submit">Send</button>
+                    </div>
+                </div>
+
+
+            </form>
+
         </div>
 
     </div>

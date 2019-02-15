@@ -49,9 +49,9 @@ function showMessage(name, text) {
 
 $(function () {
     $("form").on('submit', function (e) {e.preventDefault();});
-    //$( "#connect" ).click(function() { connect(); });
+    $("#send").on('submit', function (e) {e.preventDefault();});
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendMsg();});
+    $( "#send" ).click(function() { sendMsg(); $('#text').val("");});
     connect();
     loadScoreBoard();
 });

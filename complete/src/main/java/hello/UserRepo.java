@@ -13,9 +13,6 @@ public class UserRepo {
     public UserRepo() {
         users = new ArrayList<>();
 
-//        for (int i = 1; i <= 10; i++) {
-//            users.add(new User("user"+i+"@gmail.com","passw"+i,1000+i));
-//        }
         users.add(new User("anatoli@gmail.com", "anatoli", 1, "Anatoli"));
         users.add(new User("linus@gmail.com", "linus", 2, "Linus"));
         users.add(new User("luc@gmail.com", "luc", 3, "Luc"));
