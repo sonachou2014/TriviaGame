@@ -66,4 +66,10 @@ public class LoginController {
         return "profilepage";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate(); // you could also invalidate the whole session, a new session will be created the next request
+        return "login";
+    }
+
 }
