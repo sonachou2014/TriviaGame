@@ -20,11 +20,11 @@ public class LoginController {
         return "login";
     }
 
-//    @PostMapping("/trivia/random")
     @PostMapping("/")
     public String user(Model model, HttpSession session, @RequestParam String inputEmail, @RequestParam String inputPassword){
         if (userRepo.validateUser(inputEmail,inputPassword).equals("userValid")){
             User user = userRepo.getUser(inputEmail);
+            user.setOnline(true);
             session.setAttribute("username", user.getName());
             session.setAttribute("score",user.getScore());
             return "chatbox";
@@ -74,6 +74,9 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session){
+        String name =  (String) session.getAttribute("username");
+        User user = userRepo.getUserByName(name);
+        user.setOnline(false);
         session.invalidate(); // you could also invalidate the whole session, a new session will be created the next request
         return "login";
     }

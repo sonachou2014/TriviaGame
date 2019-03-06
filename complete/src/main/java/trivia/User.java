@@ -6,6 +6,15 @@ public class User {
     private String password;
     private int score;
     private String name;
+    private boolean isOnline;
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
+    }
 
     public User(String userId, String password, int score, String name) {
         this.userId = userId;
