@@ -1,12 +1,28 @@
 package trivia;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="USERS")
 public class User {
 
-    private String userId;
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private String email;
     private String password;
     private int score;
-    private String name;
+    @Column(name = "IS_ONLINE")
     private boolean isOnline;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public boolean isOnline() {
         return isOnline;
@@ -16,19 +32,24 @@ public class User {
         isOnline = online;
     }
 
-    public User(String userId, String password, int score, String name) {
-        this.userId = userId;
+    public User () {
+
+    }
+
+    public User(String email, String password, String name, int score, boolean isOnline) {
+        this.email = email;
         this.password = password;
-        this.score = score;
         this.name = name;
+        this.score = score;
+        this.isOnline = true;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -58,7 +79,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userId='" + userId + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", score=" + score +
                 '}';

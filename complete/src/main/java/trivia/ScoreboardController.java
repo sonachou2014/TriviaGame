@@ -12,26 +12,11 @@ import java.util.List;
 public class ScoreboardController {
 
     @Autowired
-    private UserRepo repository;
+    private UsersRepository usersRepository;
 
     @GetMapping("/scoreboard")
-    public List scoreboard(@RequestParam(required=false, defaultValue="0") int page, @RequestParam(required=false, defaultValue="20") int size) {
-        List<User> list = repository.getUsers(page, size);
-        List<User> onlineUsers = new ArrayList<>();
-
-        for(User user : list) {
-            if (user.isOnline()) {
-                onlineUsers.add(user);
-            }
-        }
-
+    public List scoreboard() {
+        List<User> onlineUsers = usersRepository.findByIsOnlineTrue();
         return onlineUsers;
-    }
-
-    @GetMapping("/changeScore")
-    public void changeScore(@RequestParam String userId) {
-        System.out.println(userId);
-        User user = repository.getUser(userId);
-        user.setScore(user.getScore() + 1);
     }
 }

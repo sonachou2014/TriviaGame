@@ -17,19 +17,24 @@ public class MessageController {
     private String correctAnswer = null;
     Boolean isAnswered = true;
     int counter = 0;
+
     @Autowired
     private SimpMessagingTemplate template;
+
     @Autowired
-    private UserRepo repository;
+    private UsersRepository usersRepository;
 
     @MessageMapping("/msg")
     @SendTo("/topic/main")
     public void message(Message message) throws Exception {
         Thread.sleep(100);
-        this.template.convertAndSend("/topic/main", "{\"name\":\"" +message.getName() + "\",\"text\":\"" + message.getText() + "\"}");
+        String name = usersRepository.findById(Long.valueOf(message.getName())).get().getName();
+        this.template.convertAndSend("/topic/main", "{\"name\":\"" +  name + "\",\"text\":\"" + message.getText() + "\"}");
         if (message.getText().equalsIgnoreCase(correctAnswer)){
-            User user = repository.getUserByName(message.getName());
+
+            User user = usersRepository.findById(Long.valueOf(message.getName())).get();
             user.setScore(user.getScore() + 1);
+            usersRepository.save(user);
             isAnswered = true;
             this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"correct!\"}");
         }

@@ -19,7 +19,6 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         stompClient.subscribe('/topic/main', function (msg) {
-//            console.log(msg);
             showMessage(JSON.parse(msg.body).name, JSON.parse(msg.body).text);
             if (JSON.parse(msg.body).name == "Trivia") {
                 $("#tbody").html("");
@@ -96,6 +95,7 @@ function updateScroll(){
 	var chatList = document.getElementById("chatbox-container");
 	chatList.scrollTop = chatList.scrollHeight;
 }
+
 function compare(a,b) {
   if (a.score > b.score)
     return -1;
