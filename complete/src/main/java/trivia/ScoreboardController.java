@@ -19,4 +19,5 @@ public class ScoreboardController {
         List<User> onlineUsers = usersRepository.findByIsOnlineTrue();
         return onlineUsers;
     }
+
 }
