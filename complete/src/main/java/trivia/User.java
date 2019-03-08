@@ -8,19 +8,22 @@ public class User {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String email;
     private String password;
-    private int score;
+
+    @OneToOne
+    @JoinColumn(name="scoreid")
+    private Scores scores;
     @Column(name = "IS_ONLINE")
     private boolean isOnline;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -36,12 +39,11 @@ public class User {
 
     }
 
-    public User(String email, String password, String name, int score, boolean isOnline) {
+    public User(String name, String email, String password, boolean isOnline) {
+        this.name = name;
         this.email = email;
         this.password = password;
-        this.name = name;
-        this.score = score;
-        this.isOnline = true;
+        this.isOnline = isOnline;
     }
 
     public String getEmail() {
@@ -60,12 +62,12 @@ public class User {
         this.password = password;
     }
 
-    public int getScore() {
-        return score;
+    public Scores getScores() {
+        return scores;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setScores(Scores scores) {
+        this.scores = scores;
     }
 
     public String getName() {
@@ -81,7 +83,7 @@ public class User {
         return "User{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", score=" + score +
+                ", score=" + this.scores.getCurrent_score() +
                 '}';
     }
 }

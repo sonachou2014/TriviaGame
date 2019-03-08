@@ -15,21 +15,31 @@ public class LoginController {
    @Autowired
    private UsersRepository usersRepository;
 
+   @Autowired
+   private ScoresRepository scoresRepository;
+
     @GetMapping("/")
     public String loginForm() {
         return "login";
     }
 
     @PostMapping("/signup")
-    public String userSignUp(Model model, HttpSession session,@RequestParam String name, @RequestParam String email, @RequestParam String password,@RequestParam String password_confirmation){
+    public String userSignUp(Model model, HttpSession session, @RequestParam String name, @RequestParam String email, @RequestParam String password,@RequestParam String password_confirmation){
         if (!password.equals(password_confirmation)){
             session.setAttribute("message","Password do not match");
             return "register";
         }
 
         else if (email!=null && password!=null){
-            User user = new User (name, email, password, 0, true);
+            User user = new User (name, email, password, true);
+            Scores scores = new Scores(0,0);
+
+            scoresRepository.save(scores);
+            user.setScores(scores);
             usersRepository.save(user);
+            user.getScores().setUser(user);
+            scoresRepository.save(user.getScores());
+
             model.addAttribute("name","Thank you for creating the account "+name+"! Log in to start you Trivia Game.");
             return "login";
         } else
@@ -47,7 +57,10 @@ public class LoginController {
             user.setOnline(true);
             usersRepository.save(user);
             session.setAttribute("id", user.getId());
-            session.setAttribute("score",user.getScore());
+            if (user.getScores()!=null){
+                session.setAttribute("score",user.getScores().getCurrent_score());
+            }
+
             return "chatbox";
         }
         else {
