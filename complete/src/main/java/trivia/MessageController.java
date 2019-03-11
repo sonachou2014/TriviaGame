@@ -24,6 +24,9 @@ public class MessageController {
     @Autowired
     private UsersRepository usersRepository;
 
+    @Autowired
+    private ScoreRepository scoreRepository;
+
     @MessageMapping("/msg")
     @SendTo("/topic/main")
     public void message(Message message) throws Exception {
@@ -32,9 +35,13 @@ public class MessageController {
         this.template.convertAndSend("/topic/main", "{\"name\":\"" +  name + "\",\"text\":\"" + message.getText() + "\"}");
         if (message.getText().equalsIgnoreCase(correctAnswer)){
 
-            User user = usersRepository.findById(Long.valueOf(message.getName())).get();
-            user.setScore(user.getScore() + 1);
-            usersRepository.save(user);
+//            User user = usersRepository.findById(Long.valueOf(message.getName())).get();
+//            user.setScore(user.getScore() + 1);
+//            usersRepository.save(user);
+            Score score = scoreRepository.findByUserId(usersRepository.findById(Long.valueOf(message.getName())).get().getId());
+            score.setCurrentScore(score.getCurrentScore() + 1);
+            score.setTotalScore(score.getTotalScore() + 1);
+            scoreRepository.save(score);
             isAnswered = true;
             this.template.convertAndSend("/topic/main", "{\"name\":\"Trivia\",\"text\":\"correct!\"}");
         }

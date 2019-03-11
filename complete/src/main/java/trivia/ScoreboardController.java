@@ -13,10 +13,20 @@ public class ScoreboardController {
 
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     @GetMapping("/scoreboard")
     public List scoreboard() {
         List<User> onlineUsers = usersRepository.findByIsOnlineTrue();
-        return onlineUsers;
+//        List<User> scoreb = (List)scoreRepository.findAll();
+
+        List<UserScore> userscore = new ArrayList<>();
+
+        for (User user : onlineUsers) {
+            Score score = scoreRepository.findByUserId(user.getId());
+            userscore.add(new UserScore(user.getName(), score.getCurrentScore(), score.getTotalScore()));
+        }
+        return userscore;
     }
 }

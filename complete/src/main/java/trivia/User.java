@@ -1,10 +1,13 @@
 package trivia;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="USERS")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -12,7 +15,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private int score;
+//    private int score;
     @Column(name = "IS_ONLINE")
     private boolean isOnline;
 
@@ -40,7 +43,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.score = score;
+//        this.score = score;
         this.isOnline = true;
     }
 
@@ -60,13 +63,13 @@ public class User {
         this.password = password;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
+//    public int getScore() {
+//        return score;
+//    }
+//
+//    public void setScore(int score) {
+//        this.score = score;
+//    }
 
     public String getName() {
         return name;
@@ -81,7 +84,7 @@ public class User {
         return "User{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", score=" + score +
+//                ", score=" + score +
                 '}';
     }
 }

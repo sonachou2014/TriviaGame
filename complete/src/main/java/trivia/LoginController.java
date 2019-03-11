@@ -12,8 +12,11 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
 
-   @Autowired
-   private UsersRepository usersRepository;
+    @Autowired
+    private UsersRepository usersRepository;
+
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     @GetMapping("/")
     public String loginForm() {
@@ -47,7 +50,8 @@ public class LoginController {
             user.setOnline(true);
             usersRepository.save(user);
             session.setAttribute("id", user.getId());
-            session.setAttribute("score",user.getScore());
+//            session.setAttribute("score",user.getScore());
+//            session.setAttribute("score", );
             return "chatbox";
         }
         else {
