@@ -21,6 +21,12 @@ public class Score implements Serializable {
     public Score() {
     }
 
+    public Score(User user) {
+        this.user = user;
+        this.currentScore = 0;
+        this.totalScore = 0;
+    }
+
     public long getId() {
         return id;
     }

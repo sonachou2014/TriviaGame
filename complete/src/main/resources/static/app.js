@@ -64,21 +64,16 @@ function loadScoreBoard() {
         url: '/scoreboard',
         dataType: 'json',
         success: function(data) {
-//        console.log(data);
         data.sort(compare);
         console.log(data);
           for (let i = 0; i < data.length; i++) {
-            addRow(data[i].userName, data[i].currentScore, data[i].totalScore)
-            console.log("username- " + data[i].userName);
+            addRow(data[i].userName, data[i].currentScore, data[i].totalScore);
           }
         }
     });
 }
 
 function addRow(userName, currentScore, totalScore) {
-console.log(userName);
-console.log(currentScore);
-console.log(totalScore);
     let row = $("<tr></tr>");
     let userIdCell = $("<td></td>").text(userName);
     let scoreCell = $("<td></td>").text(currentScore + "/" + totalScore);

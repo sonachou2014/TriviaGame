@@ -24,15 +24,17 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public String userSignUp(Model model, HttpSession session,@RequestParam String name, @RequestParam String email, @RequestParam String password,@RequestParam String password_confirmation){
+    public String userSignUp(Model model, HttpSession session, @RequestParam String name, @RequestParam String email, @RequestParam String password,@RequestParam String password_confirmation){
         if (!password.equals(password_confirmation)){
             session.setAttribute("message","Password do not match");
             return "register";
         }
 
         else if (email!=null && password!=null){
-            User user = new User (name, email, password, 0, true);
+            User user = new User (email, name, password, false);
+            Score score = new Score(user);
             usersRepository.save(user);
+            scoreRepository.save(score);
             model.addAttribute("name","Thank you for creating the account "+name+"! Log in to start you Trivia Game.");
             return "login";
         } else
@@ -86,6 +88,9 @@ public class LoginController {
         long id = (long) session.getAttribute("id");
         User user = (User) usersRepository.findById(id).get();
         user.setOnline(false);
+        Score score = scoreRepository.findByUserId(id);
+        score.setCurrentScore(0);
+        scoreRepository.save(score);
         usersRepository.save(user);
         session.invalidate();
         return "login";

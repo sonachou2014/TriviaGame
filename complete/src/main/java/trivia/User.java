@@ -39,7 +39,7 @@ public class User implements Serializable {
 
     }
 
-    public User(String email, String password, String name, int score, boolean isOnline) {
+    public User(String email, String name, String password, boolean isOnline) {
         this.email = email;
         this.password = password;
         this.name = name;
